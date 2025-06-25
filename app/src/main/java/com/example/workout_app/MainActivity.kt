@@ -72,10 +72,13 @@ fun WorkoutStart() {
     ) {
         innerPadding ->
         Column(
-            modifier = Modifier.padding(paddingValues = innerPadding),
+            modifier = Modifier
+                .padding(innerPadding)
+                .fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(space = 16.dp),
         ) {
-
+            //konnte es nicht umsetzen, was ich mit exercises versuchte: mehr s. unten in fun
+            Exercises()
             WorkoutTimer() // Timer zählt auf Knopfdruck in Sekundentakt bis 10 und hört dann auf.
         }
     }
@@ -84,6 +87,14 @@ fun WorkoutStart() {
 // :( <-- hier wurde ein erfolgloser Versuch gelöscht
 // ok es gibt schonmal einen Timer der bis 10 zählt. als nächstes: von 10 runterzählen und startbutton. und vielleicht schöneres aussehen
 
+
+@Composable
+fun Exercises(){
+    var selection by remember { mutableStateOf(null) }
+    Button(onClick = { selection = "single_leg_extension" }) {
+        Text("Single Leg Extension") //pngs im res ordner
+    }
+}
 
 /* (youtuber voice) Nina hier,whatsup. Ich finde SO viele Alternativen zum Timer wtf.
 * erste optische Orientierung, um weiter deinen Timer zu implementieren: https://stackoverflow.com/questions/71191340/how-can-i-implement-a-timer-in-a-portable-way-in-jetpack-compose
