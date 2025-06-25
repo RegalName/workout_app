@@ -4,10 +4,13 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -72,6 +75,7 @@ fun WorkoutStart() {
             modifier = Modifier.padding(paddingValues = innerPadding),
             verticalArrangement = Arrangement.spacedBy(space = 16.dp),
         ) {
+
             WorkoutTimer() // Timer zählt auf Knopfdruck in Sekundentakt bis 10 und hört dann auf.
         }
     }
@@ -79,15 +83,54 @@ fun WorkoutStart() {
 
 // :( <-- hier wurde ein erfolgloser Versuch gelöscht
 // ok es gibt schonmal einen Timer der bis 10 zählt. als nächstes: von 10 runterzählen und startbutton. und vielleicht schöneres aussehen
+
+
+/* (youtuber voice) Nina hier,whatsup. Ich finde SO viele Alternativen zum Timer wtf.
+* erste optische Orientierung, um weiter deinen Timer zu implementieren: https://stackoverflow.com/questions/71191340/how-can-i-implement-a-timer-in-a-portable-way-in-jetpack-compose
+* Ich kriege es aber nicht gebacken zu centern argh
+*/
+
 @Composable
 fun WorkoutTimer() {
     var timeLeft by remember { mutableIntStateOf(10) }
+    var isRunning by remember {mutableStateOf(false)}
 
-    LaunchedEffect(key1 = timeLeft) {
-        while (timeLeft > 0) {
-            delay(1000L)
-            timeLeft--
+// geändert, wegen Abhängigkeit vom Start Button
+    LaunchedEffect(isRunning) {
+        if (isRunning) {
+            while (timeLeft > 0) {
+                delay(1000L)
+                timeLeft--
+            }
+            isRunning = false
         }
     }
-    Text(text = "Time left: $timeLeft")
+
+// Anzeige von Button und .. der Sekundenanzeige
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
+    ) {
+
+        Text(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(
+                    top = 15.dp,
+                    bottom = 10.dp,
+                ),
+            text = "Time left: $timeLeft"
+            )
+
+        Button(onClick = {
+            if(!isRunning && timeLeft > 0){
+                isRunning = true
+            }
+        },
+            enabled =!isRunning && timeLeft>0){
+            Text("Let's GO!")
+        }
+
+    }
 }
