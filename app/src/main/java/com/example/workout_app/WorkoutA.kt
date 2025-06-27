@@ -1,10 +1,8 @@
 package com.example.workout_app
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -22,12 +20,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun WorkoutA() {
+fun WorkoutA(navController: NavController, numberOfWorkouts: Int) {
+//    var numberOfWorkouts = numberOfWorkouts
     Scaffold(
         topBar = {
             TopAppBar(
@@ -50,10 +49,17 @@ fun WorkoutA() {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Text("Workout A")
+            Text("\"Raise your left leg, and balance on your right leg. Swing your left leg back, and raise your left arm up. This exercise will help tone your stomach, hips, and upper arms. Repeat this movement several times.\n" +
+                    "\n" +
+                    "Now let's work on the other side. ")
             //konnte es nicht umsetzen, was ich mit exercises versuchte: mehr s. unten in fun
-            Exercises()
+//            Exercises()
             WorkoutTimer() // Timer zählt auf Knopfdruck in Sekundentakt bis 10 und hört dann auf.
+            Button(onClick = {
+                navController.navigate(Routes.startScreen+ "/$numberOfWorkouts")
+            }) {
+                Text("Finish Workout")
+            }
         }
     }
 }
@@ -91,18 +97,15 @@ fun WorkoutTimer() {
 
 // Anzeige von Button und .. der Sekundenanzeige
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
         Text(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(
-                    top = 15.dp,
-                    bottom = 10.dp,
-                ),
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .padding(
+//                    top = 15.dp,
+//                    bottom = 10.dp,
+//                ),
             text = "Time left: $timeLeft"
         )
 

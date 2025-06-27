@@ -22,26 +22,30 @@ class MainActivity : ComponentActivity() {
 fun AppNavigation() {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = Routes.startScreen, builder ={
-        composable(Routes.startScreen){
-            StartScreen(navController)
+        composable(Routes.startScreen+ "/{numberOfWorkouts}"){
+            val numberOfWorkouts = it.arguments?.getInt("numberOfWorkouts")
+            StartScreen(navController, numberOfWorkouts?: 0)
         }
-        composable(Routes.WorkoutA){
-            WorkoutA()
+        composable(Routes.workoutA+ "/{numberOfWorkouts}"){
+            val numberOfWorkouts = it.arguments?.getInt("numberOfWorkouts")
+            WorkoutA(navController, numberOfWorkouts?: 0)
         }
-        composable(Routes.WorkoutB){
-            WorkoutB()
+        composable(Routes.workoutB+ "/{numberOfWorkouts}"){
+            val numberOfWorkouts = it.arguments?.getInt("numberOfWorkouts")
+            WorkoutB(navController, numberOfWorkouts?: 0)
         }
-        composable(Routes.WorkoutC){
-            WorkoutC()
+        composable(Routes.workoutC+ "/{numberOfWorkouts}"){
+            val numberOfWorkouts = it.arguments?.getInt("numberOfWorkouts")
+            WorkoutC(navController, numberOfWorkouts?: 0)
         }
     } )
 }
 
 object Routes {
     var startScreen = "Start_Screen"
-    var WorkoutA = "Workout_A"
-    var WorkoutB = "Workout_B"
-    var WorkoutC = "Workout_C"
+    var workoutA = "Workout_A"
+    var workoutB = "Workout_B"
+    var workoutC = "Workout_C"
 }
 
 

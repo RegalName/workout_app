@@ -28,15 +28,16 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.delay
 
-@Preview
-@Composable
-fun PreviewMessageCard() {
-    StartScreen(navController = rememberNavController())
-}
+//@Preview
+//@Composable
+//fun PreviewMessageCard() {
+//    StartScreen(navController = rememberNavController(), numberOfWorkouts = Int)
+//}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun StartScreen(navController : NavController) {
+fun StartScreen(navController : NavController, numberOfWorkouts : Int) {
+//    var numberOfWorkouts = numberOfWorkouts
     Scaffold(
         topBar = {
             TopAppBar(
@@ -60,21 +61,22 @@ fun StartScreen(navController : NavController) {
 
         ) {
             Button(onClick = {
-                navController.navigate(Routes.WorkoutA)
+                navController.navigate(Routes.workoutA+ "/$numberOfWorkouts")
             }) {
                 Text("Single Leg Extension")
             }
             Button(onClick = {
-                navController.navigate(Routes.WorkoutB)
+                navController.navigate(Routes.workoutB+ "/$numberOfWorkouts")
             }) {
-                Text("Workout B")
+                Text("Plank")
             }
             Button(onClick = {
-                navController.navigate(Routes.WorkoutC)
+                navController.navigate(Routes.workoutC+ "/$numberOfWorkouts")
             }) {
                 Text("Workout C")
             }
-            Text("Du hast X/3 Workouts abgeschlossen. (Wenns alle sind: Glückwunsch!")
+            Text("Du hast $numberOfWorkouts/3 Workouts abgeschlossen. (Wenns alle sind: Glückwunsch!")
+            Text("Workout instructions stolen from the WiiSports Wiki")
         }
     }
 }

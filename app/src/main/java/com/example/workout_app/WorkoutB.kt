@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -13,10 +14,12 @@ import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun WorkoutB() {
+fun WorkoutB(navController: NavController, numberOfWorkouts: Int) {
+//    var numberOfWorkouts = numberOfWorkouts
     Scaffold(
         topBar = {
             TopAppBar(
@@ -25,7 +28,7 @@ fun WorkoutB() {
                     titleContentColor = MaterialTheme.colorScheme.primary,
                 ),
                 title = {
-                    Text("Workout B")
+                    Text("Plank")
                 }
             )
         }
@@ -39,7 +42,18 @@ fun WorkoutB() {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Text("Workout B")
+            Text("Start by laying on your chest.\n" +
+                    "\n" +
+                    "Put your hands together or apart.\n" +
+                    "\n" +
+                    "Go onto your toes and push your body off of the ground.\n" +
+                    "\n" +
+                    "Keep this pose for thirty, sixty, or ninety seconds. ")
+            Button(onClick = {
+                navController.navigate(Routes.startScreen+ "/$numberOfWorkouts")
+            }) {
+                Text("Finish Workout")
+            }
         }
     }
 }
