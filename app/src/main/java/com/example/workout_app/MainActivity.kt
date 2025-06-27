@@ -22,21 +22,17 @@ class MainActivity : ComponentActivity() {
 fun AppNavigation() {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = Routes.startScreen, builder ={
-        composable(Routes.startScreen+ "/{numberOfWorkouts}"){
-            val numberOfWorkouts = it.arguments?.getInt("numberOfWorkouts")
-            StartScreen(navController, numberOfWorkouts?: 0)
+        composable(Routes.startScreen){
+            StartScreen(navController)
         }
-        composable(Routes.workoutA+ "/{numberOfWorkouts}"){
-            val numberOfWorkouts = it.arguments?.getInt("numberOfWorkouts")
-            WorkoutA(navController, numberOfWorkouts?: 0)
+        composable(Routes.workoutA){
+            WorkoutA(navController)
         }
-        composable(Routes.workoutB+ "/{numberOfWorkouts}"){
-            val numberOfWorkouts = it.arguments?.getInt("numberOfWorkouts")
-            WorkoutB(navController, numberOfWorkouts?: 0)
+        composable(Routes.workoutB){
+            WorkoutB(navController)
         }
-        composable(Routes.workoutC+ "/{numberOfWorkouts}"){
-            val numberOfWorkouts = it.arguments?.getInt("numberOfWorkouts")
-            WorkoutC(navController, numberOfWorkouts?: 0)
+        composable(Routes.workoutC){
+            WorkoutC(navController)
         }
     } )
 }

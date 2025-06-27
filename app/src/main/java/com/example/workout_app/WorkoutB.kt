@@ -18,8 +18,7 @@ import androidx.navigation.NavController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun WorkoutB(navController: NavController, numberOfWorkouts: Int) {
-//    var numberOfWorkouts = numberOfWorkouts
+fun WorkoutB(navController: NavController) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -50,7 +49,7 @@ fun WorkoutB(navController: NavController, numberOfWorkouts: Int) {
                     "\n" +
                     "Keep this pose for thirty, sixty, or ninety seconds. ")
             Button(onClick = {
-                navController.navigate(Routes.startScreen+ "/$numberOfWorkouts")
+                navController.navigate(Routes.startScreen)
             }) {
                 Text("Finish Workout")
             }

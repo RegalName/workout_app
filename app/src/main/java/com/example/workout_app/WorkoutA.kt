@@ -25,8 +25,7 @@ import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun WorkoutA(navController: NavController, numberOfWorkouts: Int) {
-//    var numberOfWorkouts = numberOfWorkouts
+fun WorkoutA(navController: NavController) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -56,7 +55,7 @@ fun WorkoutA(navController: NavController, numberOfWorkouts: Int) {
 //            Exercises()
             WorkoutTimer() // Timer zählt auf Knopfdruck in Sekundentakt bis 10 und hört dann auf.
             Button(onClick = {
-                navController.navigate(Routes.startScreen+ "/$numberOfWorkouts")
+                navController.navigate(Routes.startScreen)
             }) {
                 Text("Finish Workout")
             }

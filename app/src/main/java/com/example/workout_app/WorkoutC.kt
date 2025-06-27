@@ -18,8 +18,7 @@ import androidx.navigation.NavController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun WorkoutC(navController: NavController, numberOfWorkouts: Int) {
-//    var numberOfWorkouts = numberOfWorkouts
+fun WorkoutC(navController: NavController) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -44,7 +43,7 @@ fun WorkoutC(navController: NavController, numberOfWorkouts: Int) {
         ) {
             Text("Workout C")
             Button(onClick = {
-                navController.navigate(Routes.startScreen+ "/$numberOfWorkouts")
+                navController.navigate(Routes.startScreen)
             }) {
                 Text("Finish Workout")
             }
