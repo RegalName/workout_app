@@ -20,117 +20,61 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.delay
 
+@Preview
+@Composable
+fun PreviewMessageCard() {
+    StartScreen(navController = rememberNavController())
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun StartScreen(navController : NavController) {
-    /*
- Bei Fragen, schreiben, ich weiß nicht ob das hier veständlich ist.
- Wir sollen ja mehrere Übungen machen, dh. meine Idee wäre Folgendes:
- Wir haben am Schluss einen Startbildschirm (aka MainActivity), auf dem man verschiedene Übungen auswählt, die dann auf anderen Seiten bzw. Activities sind.
- Zuerst aber will ich eine Übung erstmal zum Laufen kriegen und das machen wir  hier in der MainActivity
- Wenn/Falls wir das schaffen, können wir uns darum kümmern, dass wir diese Übungen in die anderen Activities verlagern.
- Für die erste Übung will ich es erstmal schaffen einen Timer zu programmieren, den man starten kann und der dann bis 10 hochzählt. Glaube das ist als Grundlage ok.
-*/
-
-
-
-        Scaffold(
-            topBar = {
-                TopAppBar(
-                    colors = topAppBarColors(
-                        containerColor = MaterialTheme.colorScheme.primaryContainer,
-                        titleContentColor = MaterialTheme.colorScheme.primary,
-                    ),
-                    title = {
-                        Text("Work!! OUT!!!!!")
-                    }
-                )
-            }
-        ) {
-                innerPadding ->
-            Column(
-                modifier = Modifier
-                    .padding(innerPadding)
-                    .fillMaxSize(),
-                verticalArrangement = Arrangement.spacedBy(space = 16.dp),
-            ) {
-                //konnte es nicht umsetzen, was ich mit exercises versuchte: mehr s. unten in fun
-                Exercises()
-                WorkoutTimer() // Timer zählt auf Knopfdruck in Sekundentakt bis 10 und hört dann auf.
-            }
-        }
-
-
-// :( <-- hier wurde ein erfolgloser Versuch gelöscht
-// ok es gibt schonmal einen Timer der bis 10 zählt. als nächstes: von 10 runterzählen und startbutton. und vielleicht schöneres aussehen
-
-
-
-}
-
-@Composable
-fun Exercises(){
-    var selection by remember { mutableStateOf(null) }
-    Button(onClick = {
-//        selection = "single_leg_extension"
-    }) {
-        Text("Single Leg Extension") //pngs im res ordner
-    }
-}
-
-/* (youtuber voice) Nina hier,whatsup. Ich finde SO viele Alternativen zum Timer wtf.
-* erste optische Orientierung, um weiter deinen Timer zu implementieren: https://stackoverflow.com/questions/71191340/how-can-i-implement-a-timer-in-a-portable-way-in-jetpack-compose
-* Ich kriege es aber nicht gebacken zu centern argh
-*/
-
-@Composable
-fun WorkoutTimer() {
-    var timeLeft by remember { mutableIntStateOf(10) }
-    var isRunning by remember {mutableStateOf(false)}
-
-// geändert, wegen Abhängigkeit vom Start Button
-    LaunchedEffect(isRunning) {
-        if (isRunning) {
-            while (timeLeft > 0) {
-                delay(1000L)
-                timeLeft--
-            }
-            isRunning = false
-        }
-    }
-
-// Anzeige von Button und .. der Sekundenanzeige
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
-    ) {
-
-        Text(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(
-                    top = 15.dp,
-                    bottom = 10.dp,
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                colors = topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+                    titleContentColor = MaterialTheme.colorScheme.primary,
                 ),
-            text = "Time left: $timeLeft"
-        )
-
-        Button(onClick = {
-            if(!isRunning && timeLeft > 0){
-                isRunning = true
-            }
-        },
-            enabled =!isRunning && timeLeft>0){
-            Text("Let's GO!")
+                title = {
+                    Text("WORKOUT APP")
+                }
+            )
         }
+    ) {
+            innerPadding ->
+        Column(
+            modifier = Modifier
+                .padding(innerPadding)
+                .fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
 
+        ) {
+            Button(onClick = {
+                navController.navigate(Routes.WorkoutA)
+            }) {
+                Text("Single Leg Extension")
+            }
+            Button(onClick = {
+                navController.navigate(Routes.WorkoutB)
+            }) {
+                Text("Workout B")
+            }
+            Button(onClick = {
+                navController.navigate(Routes.WorkoutC)
+            }) {
+                Text("Workout C")
+            }
+            Text("Du hast X/3 Workouts abgeschlossen. (Wenns alle sind: Glückwunsch!")
+        }
     }
 }
