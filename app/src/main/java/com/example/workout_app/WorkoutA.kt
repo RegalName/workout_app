@@ -23,6 +23,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import kotlinx.coroutines.delay
 
+// https://wiisports.fandom.com/wiki/Single_Leg_Extension
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun WorkoutA(navController: NavController) {
@@ -48,6 +50,7 @@ fun WorkoutA(navController: NavController) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
+            // sehr dürftig bis jetzt
             Text("\"Raise your left leg, and balance on your right leg. Swing your left leg back, and raise your left arm up. This exercise will help tone your stomach, hips, and upper arms. Repeat this movement several times.\n" +
                     "\n" +
                     "Now let's work on the other side. ")

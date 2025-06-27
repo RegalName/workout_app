@@ -16,6 +16,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 
+// https://wiisports.fandom.com/wiki/Plank
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun WorkoutB(navController: NavController) {

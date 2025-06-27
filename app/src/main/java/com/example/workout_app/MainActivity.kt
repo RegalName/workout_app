@@ -17,7 +17,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-
+// Hier werden die Activities verwaltet. Leitet sofort auf StartScreen um
 @Composable
 fun AppNavigation() {
     val navController = rememberNavController()

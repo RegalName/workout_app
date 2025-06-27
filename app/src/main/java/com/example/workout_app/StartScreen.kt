@@ -28,6 +28,14 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.delay
 
+/*
+ Von hier aus kann man zu den verschiedenen Workouts navigieren.
+ In den verschiedenen Workout-Activities gibt es einen "Finisch Workout" Button der wieder
+ hierhin zurückführt und irgendwann auch den Zähler der abgeschlossenen Workouts erhöht. Idealerweise
+ kann man auch erst auf "Finish Workout" drücken wenn der Zähler abgelaufen ist aber. Tja.
+ Da ich mit dem Zähler viel Zeit verschwendet habe gibt es auch noch kaum Workouts. In res/drawable
+ sind ein paar (2) Bilder aus der Wiiki.
+*/
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -67,9 +75,9 @@ fun StartScreen(navController : NavController) {
             Button(onClick = {
                 navController.navigate(Routes.workoutC)
             }) {
-                Text("Workout C")
+                Text("Workout C") // hier könnte noch etwas aus https://wiisports.fandom.com/wiki/Category:Strength_Training hinkommen
             }
-            Text("Du hast ?/3 Workouts abgeschlossen. (Wenns alle sind: Glückwunsch!")
+            Text("Du hast ?/3 Workouts abgeschlossen. (Wenns alle sind: Glückwunsch!") // daraus wird erstmal nichts
             Text("Workout instructions stolen from the WiiSports Wiki")
         }
     }
